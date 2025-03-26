@@ -11,6 +11,8 @@ public class Hero : MonoBehaviour
     public float speed = 30;
     public float rollMult = -45;
     public float pitchMult = 30;
+    public GameObject projectilePrefab;
+    public float projectileSpeed = 40;
 
     [Header("Dynamic")] [Range(0,4)]
     private float _shieldLevel = 1;
@@ -43,6 +45,20 @@ public class Hero : MonoBehaviour
 
         // rotates ship for dynamic feel
         transform.rotation = Quaternion.Euler(vAxis*pitchMult, hAxis*rollMult, 0);
+
+        // allows ship to fire
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            TempFire();
+        }
+    }
+
+    void TempFire()
+    {
+        GameObject projGO = Instantiate<GameObject>(projectilePrefab);
+        projGO.transform.position = transform.position;
+        Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
+        rigidB.linearVelocity = Vector3.up * projectileSpeed;
     }
 
     void OnTriggerEnter(Collider other)
