@@ -49,7 +49,7 @@ public class Hero : MonoBehaviour
     {
         Transform rootT = other.gameObject.transform.root;
         GameObject go = rootT.gameObject;
-        Debug.Log("Shield trigger hit by:" + go.gameObject.name);
+        // Debug.Log("Shield trigger hit by:" + go.gameObject.name);
         
         // makes sure it's not the same triggering go as last time
         if(go == lastTriggerGo) return;
@@ -76,6 +76,7 @@ public class Hero : MonoBehaviour
             if(value < 0)
             {
                 Destroy(this.gameObject); // destroys Hero
+                Main.HERO_DIED(); // restarts game
             }
         }
     }
