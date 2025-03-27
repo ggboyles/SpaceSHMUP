@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public float health = 10;       // damage needed to destroy this enemy
     public int score = 100;         // points earned for destroying this
 
-    private BoundsCheck bndCheck;
+    protected BoundsCheck bndCheck;
 
     void Awake()
     {
