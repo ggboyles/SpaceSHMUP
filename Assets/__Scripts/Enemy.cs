@@ -48,18 +48,46 @@ public class Enemy : MonoBehaviour
         pos = tempPos;
     }
 
+    // can delete
+    // void OnCollisionEnter(Collision coll)
+    // {
+    //     GameObject otherGO = coll.gameObject;
+    //     if(otherGO.GetComponent<ProjectileHero>() != null)
+    //     {
+    //         Destroy(otherGO);
+    //         Destroy(gameObject);
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("Enemy hit by non-ProjectileHero: " + otherGO.name);
+    //     }
+
+    // }
+
     void OnCollisionEnter(Collision coll)
     {
         GameObject otherGO = coll.gameObject;
-        if(otherGO.GetComponent<ProjectileHero>() != null)
+        // check for collisions with ProjectileHero
+        ProjectileHero p = otherGO.GetComponent<ProjectileHero>();
+        if (p != null)
         {
+            //Only damage this enemy if its on screen
+            if (bndCheck.isOnScreen)
+            {
+                //Get damage amount from the Main WEAP_DICT.
+                health -= Main.GET_WEAPON_DEFINITION(p.type).damageOnHit;
+                if(health <= 0)
+                {
+                    // destroy this Enemy
+                    Destroy(this.gameObject);
+                }
+            }
+            // destroy the ProjectileHero regardless
             Destroy(otherGO);
-            Destroy(gameObject);
         }
         else
         {
-            Debug.Log("Enemy hit by non-ProjectileHero: " + otherGO.name);
+            print("Enemy hit by non-ProjectileHero: " + otherGO.name);
         }
-
     }
 }
