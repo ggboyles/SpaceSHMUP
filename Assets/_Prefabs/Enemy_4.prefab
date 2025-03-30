@@ -1250,6 +1250,7 @@ MonoBehaviour:
   health: 10
   score: 100
   powerUpDropChance: 1
+  duration: 4
 --- !u!114 &2635458059189146151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1262,9 +1263,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12b9216c15f1241eaa2b9cecf1c9a324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundsType: 0
-  radius: 1
-  keepOnScreen: 1
+  boundsType: 1
+  radius: 8
+  keepOnScreen: 0
   screenLocs: 0
   camWidth: 0
   camHeight: 0
@@ -1295,4 +1296,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ac685fa8698424796ac5efff19387a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 0
