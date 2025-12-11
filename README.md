@@ -2,9 +2,11 @@
 
 ## Project Description
 
-**Made using Unity and C# for CS 382**
+**Made in Unity using C# for CS 382**
 
 Space SHMUP is a 2D Unity game that is inspired by the classic arcade-style space shooters.
+
+You can play it [here](https://ggboyles.github.io/SpaceSHMUP/)!
 
 This project is based on the **Space SHMUP** tutorial from the book:
 
@@ -16,6 +18,19 @@ This project is based on the **Space SHMUP** tutorial from the book:
 - Randomized power-up drops
 - A scrolling background to mimic movement 
 
+## How to Play
+- Shoot the enemy ships! There are 5 different enemy ships in total.
+- Destroyed enemies might drop power ups! There are 3 different types.
+
+**Controls**
+- **Arrow Keys / WASD** - Move the player ship
+- **Spacebar** - Shoot
+
+**Power Ups**  
+Throughout the game, enemies may drop power ups to help you survive longer and deal more damage. Each power up is labeled with a unique letter.
+- **Shield (O)** - Picking up these will protect your ship!
+- **Blaster (B)** - This is your default weapon, but can be upgraded by collecting additional Blaster power ups. Shoots projectiles in a straight line.
+- **Spread (S)** - Fire multiple projectiles in a wide arc, similiar to a shotgun.
 
 ## Setup and Installation
 
@@ -44,18 +59,3 @@ This project is based on the **Space SHMUP** tutorial from the book:
 
  6. **Start the game**
     - Click the play button in the Unity toolbar at the top
-   
-
-## How to Play
-- Shoot the enemy ships! There are 5 different enemy ships in total.
-- Destroyed enemies might drop power ups! There are 3 different types.
-
-**Controls**
-- **Arrow Keys / WASD** - Move the player ship
-- **Spacebar** - Shoot
-
-**Power Ups**  
-Throughout the game, enemies may drop power ups to help you survive longer and deal more damage. Each power up is labeled with a unique letter.
-- **Shield (O)** - Picking up these will protect your ship!
-- **Blaster (B)** - This is your default weapon, but can be upgraded by collecting additional Blaster power ups. Shoots projectiles in a straight line.
-- **Spread (S)** - Fire multiple projectiles in a wide arc, similiar to a shotgun.
