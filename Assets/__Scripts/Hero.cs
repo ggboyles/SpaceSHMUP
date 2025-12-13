@@ -24,6 +24,10 @@ public class Hero : MonoBehaviour
     // creating a WeaponFireDelegate event named fireEvent
     public event WeaponFireDelegate fireEvent;
 
+    // added for auto-fire timing (touch & mouse)
+    public float fireRate = 0.2f;
+    private float nextFireTime = 0f;
+
     void Awake()
     {
         if (S == null)
@@ -47,10 +51,30 @@ public class Hero : MonoBehaviour
         float hAxis = Input.GetAxis("Horizontal");
         float vAxis = Input.GetAxis("Vertical");
 
-        // change transform.position based on the axes
+        // keyboard movement
         Vector3 pos = transform.position;
         pos.x += hAxis * speed * Time.deltaTime;
         pos.y += vAxis * speed * Time.deltaTime;
+
+        // touch and mouse drag movement
+        if (Input.GetMouseButton(0))
+        {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = Camera.main.WorldToScreenPoint(transform.position).z;
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+            pos = Vector3.Lerp(pos, worldPos, speed * Time.deltaTime);
+        }
+
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector3 touchPos = touch.position;
+            touchPos.z = Camera.main.WorldToScreenPoint(transform.position).z;
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(touchPos);
+            pos = Vector3.Lerp(pos, worldPos, speed * Time.deltaTime);
+        }
+
+        // change transform.position based on the axes
         transform.position = pos;
 
         // rotates ship for dynamic feel
@@ -63,9 +87,15 @@ public class Hero : MonoBehaviour
         // }
 
         // use the fireEvent to fire Weapons when the Spacebar is pressed
-        if(Input.GetAxis("Jump") == 1 && fireEvent != null)
+        bool wantsToFire =
+            Input.GetAxis("Jump") == 1 ||
+            Input.GetMouseButton(0) ||
+            Input.touchCount > 0;
+
+        if(wantsToFire && fireEvent != null && Time.time >= nextFireTime)
         {
             fireEvent();
+            nextFireTime = Time.time + fireRate;
         }
     }
 
