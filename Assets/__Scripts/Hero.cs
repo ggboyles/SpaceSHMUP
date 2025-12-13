@@ -57,12 +57,18 @@ public class Hero : MonoBehaviour
         pos.y += vAxis * speed * Time.deltaTime;
 
         // touch and mouse drag movement
+        Vector2 tiltInput = Vector2.zero;
+
         if (Input.GetMouseButton(0))
         {
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = Camera.main.WorldToScreenPoint(transform.position).z;
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+
             pos = Vector3.Lerp(pos, worldPos, speed * Time.deltaTime);
+
+            Vector3 delta = worldPos - transform.position;
+            tiltInput = new Vector2(delta.x, delta.y);
         }
 
         if (Input.touchCount > 0)
@@ -71,8 +77,19 @@ public class Hero : MonoBehaviour
             Vector3 touchPos = touch.position;
             touchPos.z = Camera.main.WorldToScreenPoint(transform.position).z;
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(touchPos);
+
             pos = Vector3.Lerp(pos, worldPos, speed * Time.deltaTime);
+
+            Vector3 delta = worldPos - transform.position;
+            tiltInput = new Vector2(delta.x, delta.y);
         }
+
+        // normalizes touch/mouse tilt so behaves like axis input
+        tiltInput = Vector2.ClampMagnitude(tiltInput, 1f);
+
+        // blends keyboard and touch/mouse input
+        hAxis = Mathf.Clamp(hAxis + tiltInput.x, -1f, 1f);
+        vAxis = Mathf.Clamp(vAxis + tiltInput.y, -1f, 1f);
 
         // change transform.position based on the axes
         transform.position = pos;
